@@ -1,45 +1,50 @@
 #include <iostream>
-#include <vector>
-#include <string>
+#include <stdio.h>
+#include <stdlib.h>
+#define USE МАТН DEFINES // Необходимо использовать константу М _ PI 
 #include <math.h>
-
 using namespace std;
 
-int main()
+int main(int argc, char* argv[])
 {
-    double i, f1, y;
-    int k =0, x = 9;
-    const double PI = 3.14;
-    y =  (4*(1 - (1/3.0) + (1/5.0) - (1/7.0) + (1/9.0) ));
-    f1 = abs(PI - y);
-    for (i = -2; i >= -6; i-- )
+    double sum = 0, e, sl; // объявление вещественный переменных
+    int k = 1, znak = 1; // объявление целых переменных (знаменатель и знак)
+    printf_s("E="); 
+    scanf_s("%lf", &e); // ввод точности
+    int n = 0; //счетчик количества повторений цикла
+    do
     {
-        double e = pow(10, i);
-        cout << f1<< endl;
-        while (f1 >= e)
-        {
-            if (k % 2 == 0)
-            {
-                x = x + 2;
-                y = y - (1.0/ (x) );
-                f1 = abs(PI - y);
-                k +=1;
-                cout << f1 << endl;
+        sl = 4. / k; // вычисление очередного слагаемого
+        sum += sl * znak; // расчет суммы
+        k += 2;
+        znak *= -1; //изменение знака слагаемоего
+        n++; // увелечение счетчика 
+    } while (sl >= e);
+    printf_s("sum= %.10f  n =%d PI = %.10f\n", sum,  n, M_PI);
 
-            }
-            else
-            {
-                x = x + 2;
-                y = y + (1.0/ (x) );
-                f1 = abs(PI - y);
-                k +=1;
-                cout << f1 << endl; 
-            
-            }
+    double sum2 = 0, sl2, s= 0; // объявление вещественный переменных
+    int k2 = 1; // объявление целых переменных (знаменатель и знак)
+    printf_s("E="); 
+    scanf_s("%lf", &e); // ввод точности
+    int n2 = 0; //счетчик количества повторений цикла
+    do 
+    {
+        sl2 = 6. / (k2*k2);
+        s += sl2;
+        sum2 = sqrt(s);
+        k2++;
+        n2++;
+    } while(sl2 >= e);
+    printf_s("sum2 = %.10f n2 = %d PI = %.10f\n", sum2 , n2, M_PI);
 
-
-        }
+    if (n > n2)
+    {
+        cout<< "VTOROE KRUCHE";
+    }
+    else {
+        cout<< "PERVOE KRUCHE";
 
     }
-    cout<< k << endl;
+    return 0;  
+
 }
